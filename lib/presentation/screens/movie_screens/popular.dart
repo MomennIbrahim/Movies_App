@@ -46,39 +46,42 @@ class PopularScreen extends StatelessWidget {
                         color: Colors.grey.shade800,
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              seeMoreImage(
-                                  context, index, '${model[index].posterPath}'),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    SizedBox(
-                                      width: 200,
-                                      child: seeMoreTitle(
-                                          context, index, model[index].title),
-                                    ),
-                                    const SizedBox(
-                                      height: 7.5,
-                                    ),
-                                    seeMoreDateAndVote(
-                                        context,
-                                        index,
-                                        model[index].releaseDate,
-                                        model[index].voteRange),
-                                    const SizedBox(height: 7.5),
-                                    SizedBox(
-                                      width: 200,
-                                      child: seeMoreOverView(context, index,
-                                          model[index].overView),
-                                    ),
-                                  ],
-                                ),
-                              )
-                            ],
+                          child: Directionality(
+                            textDirection: lang=='en'?TextDirection.ltr:TextDirection.rtl,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                seeMoreImage(
+                                    context, index, '${model[index].posterPath}'),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      SizedBox(
+                                        width: 200,
+                                        child: seeMoreTitle(
+                                            context, index, model[index].title),
+                                      ),
+                                      const SizedBox(
+                                        height: 7.5,
+                                      ),
+                                      seeMoreDateAndVote(
+                                          context,
+                                          index,
+                                          model[index].releaseDate,
+                                          model[index].voteRange),
+                                      const SizedBox(height: 7.5),
+                                      SizedBox(
+                                        width: 200,
+                                        child: seeMoreOverView(context, index,
+                                            model[index].overView),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       ),

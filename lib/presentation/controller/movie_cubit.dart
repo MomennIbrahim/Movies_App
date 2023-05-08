@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_application/presentation/controller/tv_cubit.dart';
 import '../../models/movie_details_model.dart';
 import '../../models/movie_model.dart';
 import '../../shared/constants/api_constatnts.dart';
@@ -29,7 +30,7 @@ class MovieCubit extends Cubit<MovieStates> {
 
   int switchIndex = 1;
 
-  void toggleSwitch() {
+  void toggleSwitch(context) {
     if (switchIndex == 1) {
       switchIndex = 0;
       lang = 'en';
@@ -41,6 +42,9 @@ class MovieCubit extends Cubit<MovieStates> {
       getNowPlayingData();
       getPopularData();
       getTopRatedData();
+      TvCubit.get(context).getTvOnAirData();
+      TvCubit.get(context).getTvPopularData();
+      TvCubit.get(context).getTvTopRatedData();
     });
     emit(ToggleSwitchState());
   }

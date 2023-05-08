@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_application/presentation/controller/tv_state.dart';
+import 'package:movie_application/shared/constants/constants.dart';
 import '../../models/tv_details_model.dart';
 import '../../models/tv_model.dart';
 import '../../shared/constants/api_constatnts.dart';
@@ -17,6 +18,7 @@ class TvCubit extends Cubit<TvStates> {
     emit(GetLoadingTvOnAirData());
     DioHelper.getData(
         url: AppConstants.tvOnAir,
+      lang: lang!
     )
         .then((value) {
       tvOnAirModel = TvModel.fromJson(value.data);
@@ -35,6 +37,7 @@ class TvCubit extends Cubit<TvStates> {
     emit(GetLoadingTvPopularData());
     DioHelper.getData(
         url: AppConstants.tvPopular,
+      lang: lang!
         ).then((value) {
       tvPopularModel = TvModel.fromJson(value.data);
       emit(GetSuccessTvPopularData());
@@ -51,7 +54,8 @@ class TvCubit extends Cubit<TvStates> {
 
     emit(GetLoadingTvTopRatedData());
     DioHelper.getData(
-        url: AppConstants.tvTopRated
+        url: AppConstants.tvTopRated,
+      lang: lang!
       ,).then((value) {
       tvTopRatedModel = TvModel.fromJson(value.data);
       emit(GetSuccessTvTopRatedData());
@@ -70,7 +74,7 @@ class TvCubit extends Cubit<TvStates> {
 
     DioHelper.getData(
         url:
-        'https://api.themoviedb.org/3/tv/$tvId?api_key=6b95535dcef0dd4e6401b7cf552c8865')
+        'https://api.themoviedb.org/3/tv/$tvId?api_key=6b95535dcef0dd4e6401b7cf552c8865',lang: lang!)
         .then((value) {
       tvDetailsModel = TvDetailsModel.fromJson(value.data);
       print(tvDetailsModel!.id);

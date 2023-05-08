@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_application/presentation/screens/tv_screens/tv_details.dart';
 
+import '../../../shared/constants/constants.dart';
 import '../../components/components.dart';
 import '../../controller/tv_cubit.dart';
 import '../../controller/tv_state.dart';
@@ -19,7 +20,7 @@ class TvTopRatedScreen extends StatelessWidget {
       listener:(context,state){},
       builder:(context,state){
         return  Scaffold(
-          appBar: defaultAppbar(context, text: 'Top Rated Tvs'),
+          appBar: defaultAppbar(context, text: lang == 'en'?'Top Rated Tvs':'أعلي التقيمات'),
           body: Padding(
             padding: const EdgeInsets.all(8.0),
             child: BuildCondition(
@@ -39,30 +40,33 @@ class TvTopRatedScreen extends StatelessWidget {
                         color: Colors.grey.shade800,
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              seeMoreImage(context,index,'${model[index].posterPath}'),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    SizedBox(
-                                      width: 200,
-                                      child: seeMoreTitle(context, index,model[index].name) ,
-                                    ),
-                                    const SizedBox(height: 7.5,),
-                                    seeMoreDateAndVote(context,index,model[index].firstAirData,model[index].voteAverage),
-                                    const SizedBox(height: 7.5),
-                                    SizedBox(
-                                      width: 200,
-                                      child: seeMoreOverView(context,index,model[index].overview) ,
-                                    ),
-                                  ],
-                                ),
-                              )
-                            ],
+                          child: Directionality(
+                            textDirection: lang=='en'?TextDirection.ltr:TextDirection.rtl,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                seeMoreImage(context,index,'${model[index].posterPath}'),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      SizedBox(
+                                        width: 200,
+                                        child: seeMoreTitle(context, index,model[index].name) ,
+                                      ),
+                                      const SizedBox(height: 7.5,),
+                                      seeMoreDateAndVote(context,index,model[index].firstAirData,model[index].voteAverage),
+                                      const SizedBox(height: 7.5),
+                                      SizedBox(
+                                        width: 200,
+                                        child: seeMoreOverView(context,index,model[index].overview) ,
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       ),

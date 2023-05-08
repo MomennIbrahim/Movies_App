@@ -29,7 +29,7 @@ class MovieScreen extends StatelessWidget {
           builder: (context) {
             return SingleChildScrollView(
               child: Directionality(
-                textDirection: MovieCubit.get(context).switchIndex==0?TextDirection.ltr:TextDirection.rtl,
+                textDirection: lang=='en'?TextDirection.ltr:TextDirection.rtl,
                 child: Stack(
                   alignment: Alignment.topRight,
                   children: [
@@ -111,7 +111,7 @@ class MovieScreen extends StatelessWidget {
                         totalSwitches: 2,
                         cornerRadius: 20.0,
                         onToggle: (value){
-                          MovieCubit.get(context).toggleSwitch();
+                          MovieCubit.get(context).toggleSwitch(context);
                           CachedHelper.saveData(key: 'lang', value: lang).then((value){
                             MovieCubit.get(context).getNowPlayingData();
                             MovieCubit.get(context).getPopularData();
